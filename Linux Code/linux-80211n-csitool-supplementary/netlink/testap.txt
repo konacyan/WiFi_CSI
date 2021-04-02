@@ -1,0 +1,122 @@
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap90.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464739 sec，61679927 nanosec
+received 213 bytes: id: 26 val: 1 seq: 0 clen: 213
+200 data , CLOCK_REALTIME: 1615464759 sec，192592605 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap90_1.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464800 sec，770030832 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464802 sec，821235933 nanosec
+400 data , CLOCK_REALTIME: 1615464804 sec，823718357 nanosec
+600 data , CLOCK_REALTIME: 1615464806 sec，824761412 nanosec
+800 data , CLOCK_REALTIME: 1615464808 sec，830367019 nanosec
+1000 data , CLOCK_REALTIME: 1615464810 sec，833644002 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap90_0.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464819 sec，781459725 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464821 sec，785096112 nanosec
+400 data , CLOCK_REALTIME: 1615464823 sec，792558367 nanosec
+600 data , CLOCK_REALTIME: 1615464825 sec，793221223 nanosec
+800 data , CLOCK_REALTIME: 1615464827 sec，773549941 nanosec
+1000 data , CLOCK_REALTIME: 1615464829 sec，776162977 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap135_0.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464846 sec，739927018 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464848 sec，745821312 nanosec
+400 data , CLOCK_REALTIME: 1615464850 sec，748380588 nanosec
+600 data , CLOCK_REALTIME: 1615464852 sec，751896852 nanosec
+800 data , CLOCK_REALTIME: 1615464854 sec，751052849 nanosec
+1000 data , CLOCK_REALTIME: 1615464856 sec，763795943 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap135_1.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464861 sec，996133285 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464863 sec，999955058 nanosec
+400 data , CLOCK_REALTIME: 1615464866 sec，2574746 nanosec
+600 data , CLOCK_REALTIME: 1615464868 sec，2535583 nanosec
+800 data , CLOCK_REALTIME: 1615464870 sec，8663019 nanosec
+1000 data , CLOCK_REALTIME: 1615464872 sec，11791864 nanosec
+^C1200 data , CLOCK_REALTIME: 1615464874 sec，18189501 nanosec
+1400 data , CLOCK_REALTIME: 1615464876 sec，20809802 nanosec
+^[[A1600 data , CLOCK_REALTIME: 1615464878 sec，32215547 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap180_0.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464892 sec，853334037 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464894 sec，855809992 nanosec
+400 data , CLOCK_REALTIME: 1615464896 sec，858265014 nanosec
+600 data , CLOCK_REALTIME: 1615464898 sec，858496467 nanosec
+800 data , CLOCK_REALTIME: 1615464900 sec，860591683 nanosec
+1000 data , CLOCK_REALTIME: 1615464902 sec，863891963 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap180_1.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464909 sec，257447994 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464911 sec，264223761 nanosec
+400 data , CLOCK_REALTIME: 1615464913 sec，271580895 nanosec
+600 data , CLOCK_REALTIME: 1615464915 sec，463561593 nanosec
+800 data , CLOCK_REALTIME: 1615464917 sec，942868472 nanosec
+1000 data , CLOCK_REALTIME: 1615464920 sec，197991096 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap45_0.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464935 sec，673418126 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464937 sec，675549009 nanosec
+400 data , CLOCK_REALTIME: 1615464939 sec，677753195 nanosec
+600 data , CLOCK_REALTIME: 1615464941 sec，680514056 nanosec
+800 data , CLOCK_REALTIME: 1615464943 sec，692310043 nanosec
+1000 data , CLOCK_REALTIME: 1615464945 sec，693289107 nanosec
+^C1200 data , CLOCK_REALTIME: 1615464947 sec，675362047 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap45_1.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464954 sec，917459356 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464956 sec，921451993 nanosec
+400 data , CLOCK_REALTIME: 1615464958 sec，921749779 nanosec
+600 data , CLOCK_REALTIME: 1615464960 sec，922343593 nanosec
+800 data , CLOCK_REALTIME: 1615464962 sec，926996279 nanosec
+1000 data , CLOCK_REALTIME: 1615464964 sec，924337850 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap0_0.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464974 sec，742253144 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464976 sec，743554889 nanosec
+400 data , CLOCK_REALTIME: 1615464978 sec，744539688 nanosec
+600 data , CLOCK_REALTIME: 1615464980 sec，749447205 nanosec
+800 data , CLOCK_REALTIME: 1615464982 sec，759383325 nanosec
+1000 data , CLOCK_REALTIME: 1615464984 sec，761320890 nanosec
+^CCaught signal 2
+gongyb@gongyb:~/linux-80211n-csitool-supplementary/netlink$ sudo ./log_to_file testap0_1.dat
+Start log_to_file
+
+First data, CLOCK_REALTIME: 1615464988 sec，500310800 nanosec
+received 393 bytes: id: 26 val: 1 seq: 0 clen: 393
+200 data , CLOCK_REALTIME: 1615464990 sec，504130902 nanosec
+400 data , CLOCK_REALTIME: 1615464992 sec，498873728 nanosec
+600 data , CLOCK_REALTIME: 1615464994 sec，500023911 nanosec
+800 data , CLOCK_REALTIME: 1615464996 sec，507861236 nanosec
+1000 data , CLOCK_REALTIME: 1615464998 sec，509590111 nanosec
+^CCaught signal 2
+
