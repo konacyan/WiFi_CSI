@@ -5,7 +5,7 @@ addpath('tensorlab_2016-03-28');
 addpath('linux-80211n-csitool-supplementary');
 %% code parameter
 simulation_flag = 0;
-plot_flag = 1;
+plot_flag = 0;
 phaseCalibration_flag = 1;
 bandwidth_flag = 0; %if bandwith flag == 1, HT40MHz mode; else HT20MHz mode
 antenna_flag = 0; % if antenna_flag == 1, N_tx = 3; else N_tx = 2;
@@ -35,7 +35,7 @@ Lambda = c./f_carrier;
 % for i_file =1: length(filenum)
 %     fileNum = num2str(filenum(i_file));
 
-filename = '0316log-31_2';
+filename = '0316log-11_1';
 filepath = ['Data/0316_AP/',filename,'.dat'];
 WLAN = wifi_config();
 [csi_data,csi_trace] = gene_csi(filepath);
@@ -44,8 +44,8 @@ WLAN = wifi_config();
 % Groundtruth
 groundtruth_x = str2num(filename(end-3));
 groundtruth_y = str2num(filename(end-2));
-angle_true = 90 - 180/pi*atan(groundtruth_y/groundtruth_x)
-phase_difference_true = 2*pi*d/lambda*sin(angle_true*pi/180)
+angle_true = 90 - 180/pi*atan(groundtruth_y/groundtruth_x);
+phase_difference_true = 2*pi*d/lambda*sin(angle_true*pi/180);
 % only the first data is used
 
 % for i_csi = 1:length(csi_data)
@@ -58,9 +58,12 @@ phase_difference_true = 2*pi*d/lambda*sin(angle_true*pi/180)
 % end
 
 %% preprocessing
-pack_num = length(csi_data);
+% pack_num = length(csi_data);
 
-i_csi = 1;
+pack_num = 500;
+for i_csi = 1:pack_num
+i_csi
+
 csi = csi_data{i_csi};
 csi_detail = csi_trace{i_csi};
 [N_t N_r N_c] = size(csi_data);
@@ -243,54 +246,42 @@ coefficient_gap = coefficient_true(2) - coefficient;
 coefficient2_gap = coefficient2_true(2) - coefficient2;
 Csi_unwrapphase = zeros(N_c, N_t*N_r);
 for i_t = 1:N_t
-    Csi_unwrapphase(:,(i_t - 1)*N_r + 1)= csi_unwrapphase(:,(i_t - 1)*N_r + 1); 
-    Csi_unwrapphase(:,(i_t - 1)*N_r + 2)= csi_unwrapphase(:,(i_t - 1)*N_r + 2) - coefficient_gap(i_t, 1); 
-    Csi_unwrapphase(:,(i_t - 1)*N_r + 3)= csi_unwrapphase(:,(i_t - 1)*N_r + 3) - coefficient2_gap(i_t, 1); 
-end
-
-%calculate the new difference
-Csi_Difference = zeros(N_c,N_t*N_r);
-for i_t = 1:N_t
-    Csi_Difference(:,(i_t - 1)*N_r + 1)= Csi_unwrapphase(:,(i_t - 1)*N_r + 1) - Csi_unwrapphase(:,(i_t - 1)*N_r + 2);
-    Csi_Difference(:,(i_t - 1)*N_r + 2)= Csi_unwrapphase(:,(i_t - 1)*N_r + 1) - Csi_unwrapphase(:,(i_t - 1)*N_r + 3); 
-    Csi_Difference(:,(i_t - 1)*N_r + 3)= Csi_unwrapphase(:,(i_t - 1)*N_r + 2) - Csi_unwrapphase(:,(i_t - 1)*N_r + 3); 
-end
-
-%plot the calibrated phase
-    figure;
-    for i_t = 1:N_t
-            subplot(1,2,i_t)
-            plot(subcarrier_idx, Csi_unwrapphase(:,(i_t - 1)*N_r + 1),'r*-','linewidth',1.2);
-            hold on;
-            plot(subcarrier_idx, Csi_unwrapphase(:,(i_t - 1)*N_r + 2),'bo-','linewidth',1.2);
-            hold on;
-            plot(subcarrier_idx, Csi_unwrapphase(:,(i_t - 1)*N_r + 3),'k+-','linewidth',1.2);  
-            hold off;
-            xlabel('Subcarrier Index','FontName','Times New Roman','FontSize',14);
-            ylabel('Unwrap Phase','FontName','Times New Roman','FontSize',14);
-            l1 = legend('RX 1','RX 2','RX 3');
-            set(l1, 'FontName','Times New Roman');
-            axis([-28 28 -25 5]);
-            title(['Pack Num: ',num2str(i_csi)],'FontName','Times New Roman','FontSize',14);
-    end
-%plot new phase difference
-    figure;
-    for i_t = 1:N_t
-            subplot(1,2,i_t)
-            plot(subcarrier_idx, Csi_Difference(:,(i_t - 1)*N_r + 1),'r*-','linewidth',1.2);
-            hold on;
-            plot(subcarrier_idx, Csi_Difference(:,(i_t - 1)*N_r + 2),'bo-','linewidth',1.2);
-            hold on;
-            plot(subcarrier_idx, Csi_Difference(:,(i_t - 1)*N_r + 3),'k+-','linewidth',1.2);  
-            hold off;
-            xlabel('Subcarrier Index','FontName','Times New Roman','FontSize',14);
-            ylabel('Unwrap Phase','FontName','Times New Roman','FontSize',14);
-            l2 = legend('RX 1 - RX 2','RX 1 - RX 3','RX 2 - RX 3');
-            set(l2, 'FontName','Times New Roman');
-            axis([-28 28 0 8]);
-            title(['Pack Num: ',num2str(i_csi)],'FontName','Times New Roman','FontSize',14);
-            
-    end
+    Csi_unwrapphase(:,(i_t - 1)*N_r + 1)= csi_unwrapphase(: 
+% %plot the calibrated phase
+%     figure;
+%     for i_t = 1:N_t
+%             subplot(1,2,i_t)
+%             plot(subcarrier_idx, Csi_unwrapphase(:,(i_t - 1)*N_r + 1),'r*-','linewidth',1.2);
+%             hold on;
+%             plot(subcarrier_idx, Csi_unwrapphase(:,(i_t - 1)*N_r + 2),'bo-','linewidth',1.2);
+%             hold on;
+%             plot(subcarrier_idx, Csi_unwrapphase(:,(i_t - 1)*N_r + 3),'k+-','linewidth',1.2);  
+%             hold off;
+%             xlabel('Subcarrier Index','FontName','Times New Roman','FontSize',14);
+%             ylabel('Unwrap Phase','FontName','Times New Roman','FontSize',14);
+%             l1 = legend('RX 1','RX 2','RX 3');
+%             set(l1, 'FontName','Times New Roman');
+%             axis([-28 28 -25 5]);
+%             title(['Pack Num: ',num2str(i_csi)],'FontName','Times New Roman','FontSize',14);
+%     end
+% %plot new phase difference
+%     figure;
+%     for i_t = 1:N_t
+%             subplot(1,2,i_t)
+%             plot(subcarrier_idx, Csi_Difference(:,(i_t - 1)*N_r + 1),'r*-','linewidth',1.2);
+%             hold on;
+%             plot(subcarrier_idx, Csi_Difference(:,(i_t - 1)*N_r + 2),'bo-','linewidth',1.2);
+%             hold on;
+%             plot(subcarrier_idx, Csi_Difference(:,(i_t - 1)*N_r + 3),'k+-','linewidth',1.2);  
+%             hold off;
+%             xlabel('Subcarrier Index','FontName','Times New Roman','FontSize',14);
+%             ylabel('Unwrap Phase','FontName','Times New Roman','FontSize',14);
+%             l2 = legend('RX 1 - RX 2','RX 1 - RX 3','RX 2 - RX 3');
+%             set(l2, 'FontName','Times New Roman');
+%             axis([-28 28 0 8]);
+%             title(['Pack Num: ',num2str(i_csi)],'FontName','Times New Roman','FontSize',14);
+%             
+%     end
 
 
 %% phase interpolation
@@ -341,18 +332,18 @@ if phaseCalibration_flag == 1
 end    
 
 % Rebuild CSI Data
-    figure;
+%     figure;
     if bandwidth_flag == 0 % subcarrier spacing is nonuniform
 
         
         for i_t = 1: N_t*N_r
 
             csi_Poly(:,i_t) = polyval(Coefficient(i_t,:),Subcarrier_idx).';
-            subplot(N_t,N_r,i_t)
-            plot(subcarrier_idx,csi_unwrapphase(:,i_t),'o',subcarrier_idx,csi_poly(i_t,:),'k-');
-            hold on;
-            plot(Subcarrier_idx, csi_Poly(:,i_t),'r-')
-            title('Rebuild Data');
+%             subplot(N_t,N_r,i_t)
+%             plot(subcarrier_idx,csi_unwrapphase(:,i_t),'o',subcarrier_idx,csi_poly(i_t,:),'k-');
+%             hold on;
+%             plot(Subcarrier_idx, csi_Poly(:,i_t),'r-')
+%             title('Rebuild Data');
         end    
     end   
     hold off;
@@ -381,21 +372,21 @@ end
     
     
     
-% plot the residual
-    figure;
-     for i_s = 1:N_r*N_t
-            subplot(N_t, N_r,i_s)
-            
-            tx_num = fix((i_s-1)/N_r)+1;
-            rx_num = mod((i_s-1),N_r)+1;
-%             csi_res(:,i_s) = csi_Poly(:,i_s) - csi_Poly(:,(tx_num-1) * N_r + 1);
-%             plot(csi_Poly(:,i_s) - csi_Poly(:,(tx_num-1) * N_r + 1));
-            plot(csi_Poly(:,i_s) - csi_Poly(:,1));
-            xlabel('Subcarrier Index');
-            ylabel('Unwrap Phase');
-            title(['TX:',num2str(tx_num) '  RX:',num2str(rx_num)])
-    end
-    
+% % plot the residual
+%     figure;
+%      for i_s = 1:N_r*N_t
+%             subplot(N_t, N_r,i_s)
+%             
+%             tx_num = fix((i_s-1)/N_r)+1;
+%             rx_num = mod((i_s-1),N_r)+1;
+% %             csi_res(:,i_s) = csi_Poly(:,i_s) - csi_Poly(:,(tx_num-1) * N_r + 1);
+% %             plot(csi_Poly(:,i_s) - csi_Poly(:,(tx_num-1) * N_r + 1));
+%             plot(csi_Poly(:,i_s) - csi_Poly(:,1));
+%             xlabel('Subcarrier Index');
+%             ylabel('Unwrap Phase');
+%             title(['TX:',num2str(tx_num) '  RX:',num2str(rx_num)])
+%     end
+%     
 %% generate simulation CSI data 
 if simulation_flag == 1
 % multipath parameter
@@ -479,7 +470,16 @@ for i_t = 1: N_t_tilde
 end
 
 %% SpotFi
-L = 6;
+L = 3;
+L_s = L;
+sample_csi_trace = reshape(csi(1,:,:),N_r,N_c).'; 
+T = 1;
+
+% %--------------------
+% sample_csi_trace = csi; 
+% T = N_t; % number of transmitter antennas
+% %--------------------
+
 
 % % sample CSI trace is a 90x1 vector where first 30 elements correspond to subcarriers for first rx antenna, second 30 correspond to CSI from next 30 subcarriers and so on.
 % % replace sample_csi_trace with CSI from Intel 5300 converted to 90x1 vector
@@ -487,11 +487,12 @@ L = 6;
 % sample_csi_trace = sample_csi_traceTmp.sample_csi_trace;
 
 % sample_csi_trace = reshape(csi(1,:,:),N_r,N_c).'; %这里问题很大
-sample_csi_trace = csi; 
+
+
 
 % N_c = length(subcarrier_idx); % number of subcarriers
 % subCarrSize = 128;  % total number fo
-T = N_t; % number of transmitter antennas
+
 
 % MUSIC algorithm requires estimating MUSIC spectrum in a grid. 
 % paramRange captures parameters for this grid
@@ -505,7 +506,7 @@ do_second_iter = 0;
 % paramRange.seconditerGridPts = [1 51 21 21];
 paramRange.K = floor(N_r/2)+1; % parameter related to smoothing.  
 paramRange.L = floor(N_c/2); % parameter related to smoothing.  
-paramRange.T = floor(N_t/2)+1;
+paramRange.T = 1;
 paramRange.deltaRange = [0 0]; 
 
 maxRapIters = Inf;
@@ -515,8 +516,9 @@ paramRange.generateAtot = 2;
 % ToF sanitization code (Algorithm 1 in SpotFi paper)
 % csi_plot = reshape(sample_csi_trace, N_c, N_r);
 
-for i_t = 1:N_t
-    csi_sanitization = squeeze(sample_csi_trace(i_t,:,:));
+for i_t = 1:T
+%     csi_sanitization = squeeze(sample_csi_trace(i_t,:,:));
+    csi_sanitization = sample_csi_trace;
     csi_sanitization = reshape(csi_sanitization, N_c, N_r);
     [PhsSlope, PhsCons] = removePhsSlope(csi_sanitization,N_r,subcarrier_idx,N_c);
     ToMult = exp(1i* (-PhsSlope*repmat(subcarrier_idx(:),1,N_r) - PhsCons*ones(N_c,N_r) ));
@@ -540,7 +542,7 @@ Thetahat_spotFi = aoaEstimateMatrix(:,2); % AoA in degrees
 %% tensor decomposition
 % % how to estimate the exact number of multipath L in true indoor environment?
 
-L = 6;
+L = 2;
 X = csi_smooth;
 X_decom = cpd(X,L); 
 Dishat_tensor = zeros(1,L);
@@ -561,24 +563,20 @@ end
 % for i_l = 1: L
 %     Theta_sort(i_l) = Theta(Dis_idx(i_l));
 % end
-Thetahat_spotFi
-Thetahat_tensor
-%% error culculglobal matrix_perm perm_idx;perm_idx = 1;
-matrix_perm = zeros(L*(L-1),L);
-Thetahat_tensor_perm = matrix_perm;
-Thetahat_tensor_err = sum(abs(Thetahat_tensor_perm - repmat(Theta,L*(L-1),1)),2 );
-Thetahat_perm_min = Thetahat_tensor_perm(Thetahat_tensor_err == min(Thetahat_tensor_err),:);
-Thetaerr_tensor = abs(Thetahat_perm_min - Theta)
 
-perm_idx = 1;
-matrix_perm = zeros(L*(L-1),L);
-perm(Thetahat_spotFi.',1,L);
-Thetahat_spotFi_perm = matrix_perm;
-Thetahat_spotFi_err = sum(abs(Thetahat_spotFi_perm - repmat(Theta,L*(L-1),1)),2 );
-Thetahat_perm_min = Thetahat_spotFi_perm(Thetahat_spotFi_err == min(Thetahat_spotFi_err),:);
-Thetaerr_spotFi = abs(Thetahat_perm_min - Theta);
-Thetaerr_spotFi = Thetaerr_spotFi(1,:);
-%% position estimation
-% using AOD AOA and TOF estimation results, estimate user postion and obstacle postion
-% 
+
+% Thetahat_tensor
+% Thetahat_spotFi
+Theta_result_tensor(1:L,i_csi) = Thetahat_tensor(1:L);
+Theta_result_spotFi(1:L_s,i_csi) = Thetahat_spotFi(1:L_s);
+end
+save(['Result/',filename,'_',num2str(pack_num),'.mat'],'Theta_result_tensor','Theta_result_spotFi','angle_true');
+
+
+
+
+Thetahat_tensor;
+Thetahat_spotFi;
+
+
 
